@@ -3,6 +3,7 @@
 Proyek ini menyediakan lingkungan Dockerized untuk Laravel 11, termasuk PHP, Nginx, dan MySQL untuk keperluan pengembangan. Ikuti langkah-langkah di bawah untuk menjalankan proyek ini.
 
 Proyek ini dibuat untuk memenuhi tugas UTS mata kuliah pemrograman berkelompok oleh:
+
 - Naufal Zhafif Pradipta (A11.2022.14474)
 - Aurel Putri Widyanti (A11.2022.14494)
 - Ahmad Nabilul As'ad (A11.2022.14488)
@@ -10,6 +11,7 @@ Proyek ini dibuat untuk memenuhi tugas UTS mata kuliah pemrograman berkelompok o
 ## Prasyarat
 
 Pastikan Anda telah menginstal:
+
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
@@ -23,6 +25,7 @@ cd laravel-pss
 ```
 
 `Pastikan Docker Engine sudah berjalan sebelum melanjutkan.`
+
 ### Langkah 2: Konfigurasi Laravel
 
 1. Masuk ke direktori aplikasi Laravel:
@@ -69,8 +72,6 @@ DB_PASSWORD=laravel
 ### Langkah 4: Build dan Jalankan Kontainer Docker
 
 Pastikan berada di direktori utama proyek (`laravel-pss`) dan jalankan perintah berikut untuk membangun dan memulai kontainer:
-
-
 
 ```bash
 docker-compose up -d --build
@@ -124,8 +125,9 @@ docker-compose down
 
   ```bash
   docker exec -it laravel-db mysql -u laravel-pss -p
-   ```
-   Masukan password `laravel` untuk mengakses database.
+  ```
+
+  Masukan password `laravel` untuk mengakses database.
 
 ## Struktur Proyek
 
