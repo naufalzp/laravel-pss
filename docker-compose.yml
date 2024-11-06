@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./laravel11-app:/var/www
+      - ./laravel-pss-app:/var/www
     ports:
       - "8080:80"
     networks:
@@ -36,7 +36,7 @@ services:
       MYSQL_USER: laravel-pss
       MYSQL_PASSWORD: laravel
     volumes:
-      - db_data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
     networks:
       - laravel_network
 

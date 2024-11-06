@@ -22,6 +22,7 @@ git clone https://github.com/naufalzp/laravel-pss.git
 cd laravel-pss
 ```
 
+`Pastikan Docker Engine sudah berjalan sebelum melanjutkan.`
 ### Langkah 2: Konfigurasi Laravel
 
 1. Masuk ke direktori aplikasi Laravel:
@@ -33,39 +34,43 @@ cd laravel-pss
 2. Install dependensi Laravel menggunakan Composer:
 
    ```bash
-   composer install
+   docker exec laravel-app composer install
    ```
 
 3. Salin file `.env.example` menjadi `.env`:
 
    ```bash
-   cp .env.example .env
+   docker exec laravel-app cp .env.example .env
    ```
 
 4. Generate application key:
 
    ```bash
-   php artisan key:generate
+   docker exec laravel-app php artisan key:generate
    ```
 
 ### Langkah 3: Atur Variabel Lingkungan
 
-Perbarui konfigurasi database di file `.env` sebagai berikut:
+Perbarui konfigurasi database di file `.env` yang berada di direktori `laravel-pss-app`:
 
 ```env
+...
+
 DB_CONNECTION=mysql
 DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=laravel-pss
 DB_USERNAME=laravel-pss
 DB_PASSWORD=laravel
+
+...
 ```
 
 ### Langkah 4: Build dan Jalankan Kontainer Docker
 
-Kembali ke direktori utama proyek (`laravel-pss`) dan jalankan perintah berikut untuk membangun dan memulai kontainer:
+Pastikan berada di direktori utama proyek (`laravel-pss`) dan jalankan perintah berikut untuk membangun dan memulai kontainer:
 
-`DOCKER ENGINE HARUS HIDUP`
+
 
 ```bash
 docker-compose up -d --build
@@ -84,7 +89,7 @@ docker-compose exec app chmod -R 777 /var/www/storage /var/www/bootstrap/cache
 Jalankan migrasi untuk membuat tabel database:
 
 ```bash
-docker-compose exec app php artisan migrate
+docker exec laravel-app php artisan migrate
 ```
 
 ### Mengakses Aplikasi
@@ -112,11 +117,20 @@ docker-compose down
 - **Mengakses Kontainer PHP**: Untuk masuk ke dalam kontainer PHP dan menjalankan perintah Artisan, gunakan:
 
   ```bash
-  docker-compose exec app bash
+  docker exec -it laravel-app bash
   ```
+
+- **Mengakses Kontainer MySQL**: Untuk masuk ke dalam kontainer MySQL, gunakan:
+
+  ```bash
+  docker exec -it laravel-db mysql -u laravel-pss -p
+   ```
+   Masukan password `laravel` untuk mengakses database.
 
 ## Struktur Proyek
 
 - `Dockerfile`: Mendefinisikan lingkungan PHP-FPM.
 - `docker-compose.yml`: Mengatur kontainer Laravel, Nginx, dan MySQL.
+- `laravel-pss-app`: Direktori aplikasi Laravel
+- `mysql-data`: Direktori penyimpanan data MySQL.
 - `nginx/laravel.conf`: File konfigurasi Nginx untuk menjalankan aplikasi Laravel.
