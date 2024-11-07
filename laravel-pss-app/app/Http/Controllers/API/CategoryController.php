@@ -32,7 +32,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required|text',
-            'created_by' => 'required|integer'
+            'created_by' => 'required|numeric|exists:admins,id'
         ]);
 
         if ($validator->fails()) {
@@ -93,7 +93,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:100',
             'description' => 'required|string',
-            'created_by' => 'required|integer'
+            'created_by' => 'required|numeric|exists:admins,id'
         ]);
 
         if ($validator->fails()) {

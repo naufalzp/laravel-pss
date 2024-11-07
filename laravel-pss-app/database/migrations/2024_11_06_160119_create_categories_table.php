@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('description');
             $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('admins');
             $table->timestamps();
         });
     }

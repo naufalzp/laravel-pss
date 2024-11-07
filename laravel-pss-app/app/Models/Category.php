@@ -11,4 +11,9 @@ class Category extends Model
         'description',
         'created_by',
     ];
+    
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'created_by');
+    }
 }
