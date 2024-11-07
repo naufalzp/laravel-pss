@@ -37,7 +37,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:50|unique:admins',
             'password' => 'required|string|max:100',
-            'email' => 'required|email|max:100|unique:admins'
+            'email' => 'email|max:100|unique:admins'
         ]);
 
         if ($validator->fails()) {
@@ -47,10 +47,12 @@ class AdminController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
         
+        $hashedPassword = bcrypt($request->password);
+
         $admin = Admin::create([
             'username' => $request->username,
-            'password' => bcrypt($request->password),
-            'email' => $request->email
+            'password' => $hashedPassword,
+            'email' => $request->email ?? null
         ]);
 
         return response()->json([
@@ -105,7 +107,7 @@ class AdminController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:50|unique:admins,username,' . $id,
             'password' => 'required|string|max:100',
-            'email' => 'required|email|max:100|unique:admins,email,' . $id
+            'email' => 'email|max:100|unique:admins,email,' . $id
         ]);
 
         if ($validator->fails()) {
