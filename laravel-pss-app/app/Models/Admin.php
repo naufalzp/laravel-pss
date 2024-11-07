@@ -15,4 +15,14 @@ class Admin extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'created_by');
+    }
+
+    public function suppliers()
+    {
+        return $this->hasMany(Supplier::class, 'created_by');
+    }
 }
