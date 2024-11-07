@@ -15,17 +15,17 @@ class AdminSeeder extends Seeder
         $admins = [
             [
                 'username' => 'zhafif',
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'email' => 'zhafif@mail.com'
             ],
             [
                 'username' => 'aurel',
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'email' => 'aurel@mail.com'
             ],
             [
                 'username' => 'nabil',
-                'password' => 'password',
+                'password' => bcrypt('password'),
                 'email' => 'nabil@mail.com'
             ]
         ];
