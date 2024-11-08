@@ -25,4 +25,9 @@ class Admin extends Model
     {
         return $this->hasMany(Supplier::class, 'created_by');
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class,'created_by');
+    }
 }
