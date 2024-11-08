@@ -16,4 +16,9 @@ class Supplier extends Model
     {
         return $this->belongsTo(Admin::class, 'created_by');
     }
+
+    public function items()
+    {
+        return $this->hasMany(Item::class,'supplier_id');
+    }
 }
