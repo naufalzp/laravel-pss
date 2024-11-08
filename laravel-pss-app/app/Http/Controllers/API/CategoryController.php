@@ -137,4 +137,34 @@ class CategoryController extends Controller
             'message' => 'Category deleted successfully'
         ], Response::HTTP_OK);
     }
+
+    /**
+     * Display a summary for each category.
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function categorySummary()
+    {
+        $categories = Category::with('items')->get();
+
+        $summary = $categories->map(function ($category) {
+            $itemCount = $category->items->count();
+            $totalQuantity = $itemCount > 0 ? $category->items->sum('quantity') : 0;
+            $averagePrice = $itemCount > 0 ? $category->items->avg('price') : 0;
+
+            return [
+                'category_id' => $category->id,
+                'category_name' => $category->name,
+                'item_count' => $itemCount,
+                'total_quantity' => $totalQuantity,
+                'average_price' => $averagePrice,
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Category summary retrieved successfully',
+            'data' => $summary
+        ], Response::HTTP_OK);
+    }
 }
