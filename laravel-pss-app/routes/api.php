@@ -31,10 +31,13 @@ Route::get('/items/{id}', [ItemController::class, 'show']);
 Route::put('/items/{id}', [ItemController::class, 'update']);
 Route::delete('/items/{id}', [ItemController::class, 'destroy']);
 
-// Menampilkan ringkasan stok barang termasuk stok total, total nilai stok (harga x
-// jumlah), dan rata-rata harga barang.
+// Menampilkan ringkasan stok barang termasuk stok total, total nilai stok dan rata-rata harga barang.
 
 Route::get('/items/stockSummary', [ItemController::class, 'stockSummary']);
+
+// Menampilkan daftar barang yang stoknya di bawah ambang batas tertentu.
+
+Route::get('/items/lowStock/{threshold}', [ItemController::class, 'lowStockItems']);
 
 /**
  * Menampilkan ringkasan per kategori, termasuk jumlah barang per kategori, total
