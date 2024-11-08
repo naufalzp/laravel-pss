@@ -185,4 +185,15 @@ class ItemController extends Controller
             ]
         ], Response::HTTP_OK);
     }
+
+    public function lowStockItems($threshold = 5)
+    {
+        $lowStockItems = Item::where('quantity', '<', $threshold)->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Low stock items retrieved successfully',
+            'data' => $lowStockItems
+        ], Response::HTTP_OK);
+    }
 }
