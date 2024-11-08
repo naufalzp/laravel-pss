@@ -16,6 +16,11 @@ class Item extends Model
         'created_by'
     ];
 
+    protected $casts = [
+        'price' => 'float',
+        'quantity' => 'integer',
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
