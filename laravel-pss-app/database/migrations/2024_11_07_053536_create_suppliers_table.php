@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('contact_info', 100)->nullable();
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedInteger('created_by');
             $table->foreign('created_by')->references('id')->on('admins');
             $table->timestamps();
         });
