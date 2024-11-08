@@ -17,9 +17,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 15,2);
             $table->integer('quantity');
-            $table->unsignedInteger('category_id');
-            $table->unsignedInteger('supplier_id');
-            $table->unsignedInteger('created_by');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('created_by');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('supplier_id')->references('id')->on('suppliers');
             $table->foreign('created_by')->references('id')->on('admins');
