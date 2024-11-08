@@ -168,4 +168,21 @@ class ItemController extends Controller
             'message' => 'Item deleted successfully'
         ], Response::HTTP_OK);
     }
+
+    public function stockSummary()
+    {
+        $totalStock = Item::sum('quantity');
+        $totalValue = Item::sum(DB::raw('quantity * price'));
+        $averagePrice = Item::avg('price');
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Stock summary retrieved successfully',
+            'data' => [
+                'total_stock' => $totalStock,
+                'total_value' => $totalValue,
+                'average_price' => $averagePrice
+            ]
+        ], Response::HTTP_OK);
+    }
 }
