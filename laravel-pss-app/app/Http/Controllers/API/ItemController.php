@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ItemController extends Controller
@@ -47,7 +49,7 @@ class ItemController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
-                'message' =>  $validator->errors()
+                'message' => $validator->errors()
             ], Response::HTTP_BAD_REQUEST);
         }
 
@@ -174,7 +176,7 @@ class ItemController extends Controller
         $totalStock = Item::sum('quantity');
         $totalValue = Item::sum(DB::raw('quantity * price'));
         $averagePrice = Item::avg('price');
-        
+
         return response()->json([
             'status' => 'success',
             'message' => 'Stock summary retrieved successfully',
@@ -196,4 +198,39 @@ class ItemController extends Controller
             'data' => $lowStockItems
         ], Response::HTTP_OK);
     }
+
+
+    /**
+     * Get items by category
+     * 
+     * @param int $categoryId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getItemsByCategory($categoryId)
+    {
+        $category = Category::find($categoryId);
+        if (!$category) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Category not found'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $items = Item::with('admin', 'supplier')
+            ->where('category_id', $categoryId)
+            ->get();
+
+        $itemCount = $items->count();
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Items retrieved successfully by category',
+            'data' => [
+                'category' => $category,
+                'item_count' => $itemCount,
+                'items' => $items
+            ]
+        ], Response::HTTP_OK);
+    }
+
 }
