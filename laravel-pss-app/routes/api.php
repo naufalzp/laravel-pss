@@ -37,7 +37,7 @@ Route::get('/stockSummary', [ItemController::class, 'stockSummary']);
 
 // Menampilkan daftar barang yang stoknya di bawah ambang batas tertentu.
 
-Route::get('/items/lowStock/{threshold}', [ItemController::class, 'lowStockItems']);
+Route::get('/lowStock/{threshold}', [ItemController::class, 'lowStockItems']);
 
 /**
  * Menampilkan laporan barang berdasarkan kategori tertentu.
