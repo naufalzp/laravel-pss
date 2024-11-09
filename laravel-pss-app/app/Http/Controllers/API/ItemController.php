@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Item;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -221,7 +222,7 @@ class ItemController extends Controller
             ->get();
 
         $itemCount = $items->count();
-        
+
         return response()->json([
             'status' => 'success',
             'message' => 'Items retrieved successfully by category',
@@ -229,6 +230,30 @@ class ItemController extends Controller
                 'category' => $category,
                 'item_count' => $itemCount,
                 'items' => $items
+            ]
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * Get inventory summary
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function inventorySummary()
+    {
+        $totalItems = Item::count();
+        $totalStock = Item::sum('quantity');
+        $totalCategories = Category::count();
+        $totalSuppliers = Supplier::count();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Inventory summary retrieved successfully',
+            'data' => [
+                'total_items' => $totalItems,
+                'total_stock' => (int) $totalStock,
+                'total_categories' => $totalCategories,
+                'total_suppliers' => $totalSuppliers,
             ]
         ], Response::HTTP_OK);
     }
