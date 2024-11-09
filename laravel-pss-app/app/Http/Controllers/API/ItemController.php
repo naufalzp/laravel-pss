@@ -172,6 +172,11 @@ class ItemController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * Get stock summary
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function stockSummary()
     {
         $totalStock = Item::sum('quantity');
