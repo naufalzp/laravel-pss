@@ -40,6 +40,11 @@ Route::get('/items/stockSummary', [ItemController::class, 'stockSummary']);
 Route::get('/items/lowStock/{threshold}', [ItemController::class, 'lowStockItems']);
 
 /**
+ * Menampilkan laporan barang berdasarkan kategori tertentu.
+ */
+Route::get('/getItemsByCategory/{categoryId}', [ItemController::class, 'getItemsByCategory']);
+
+/**
  * Menampilkan ringkasan per kategori, termasuk jumlah barang per kategori, total
  * nilai stok tiap kategori, dan rata-rata harga barang dalam kategori tersebut.
  */
