@@ -194,7 +194,13 @@ class ItemController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function lowStockItems($threshold = 5)
+    /**
+     * Get low stock items
+     * 
+     * @param int $threshold
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function lowStockItems(int $threshold = 5)
     {
         $lowStockItems = Item::where('quantity', '<', $threshold)->get();
 
