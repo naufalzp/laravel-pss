@@ -131,6 +131,10 @@ docker-compose down
 
     Masukan password `laravel` untuk mengakses database.
 
+## Dokumentasi API
+
+Dokumentasi API dapat diakses di: [http://localhost:8080/docs/api](http://localhost:8080/docs/api)
+
 ## Struktur Proyek
 
 -   `Dockerfile`: Mendefinisikan lingkungan PHP-FPM.
