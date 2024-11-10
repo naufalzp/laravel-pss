@@ -187,9 +187,9 @@ class ItemController extends Controller
             'status' => 'success',
             'message' => 'Stock summary retrieved successfully',
             'data' => [
-                'total_stock' => $totalStock,
-                'total_value' => $totalValue,
-                'average_price' => $averagePrice
+                'total_stock' => (int) $totalStock,
+                'total_value' => (float) $totalValue,
+                'average_price' => (float) $averagePrice
             ]
         ], Response::HTTP_OK);
     }
