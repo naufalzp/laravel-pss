@@ -97,9 +97,11 @@ docker exec laravel-app php artisan migrate --seed
 
 ### Mengakses Aplikasi
 
-Setelah kontainer berjalan, Anda bisa mengakses aplikasi Laravel di:
+Setelah kontainer berjalan, Anda bisa mengakses aplikasi Laravel di: [http://localhost:8080](http://localhost:8080)
 
--   [http://localhost:8080](http://localhost:8080)
+## Dokumentasi API
+
+Dokumentasi API dapat diakses di: [http://localhost:8080/docs/api](http://localhost:8080/docs/api)
 
 ## Menghentikan Kontainer
 
@@ -130,10 +132,6 @@ docker-compose down
     ```
 
     Masukan password `laravel` untuk mengakses database.
-
-## Dokumentasi API
-
-Dokumentasi API dapat diakses di: [http://localhost:8080/docs/api](http://localhost:8080/docs/api)
 
 ## Struktur Proyek
 
