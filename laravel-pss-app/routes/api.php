@@ -55,3 +55,10 @@ Route::get('/inventorySummary', [ItemController::class, 'inventorySummary']);
  * nilai stok tiap kategori, dan rata-rata harga barang dalam kategori tersebut.
  */
 Route::get('/categorySummary', [CategoryController::class, 'categorySummary']);
+
+
+/**
+ * Menampilkan ringkasan barang yang disuplai oleh masing-masing pemasok,
+ * termasuk jumlah barang per pemasok dan total nilai barang yang disuplai. 
+ */
+Route::get('/supplierSummary', [SupplierController::class, 'supplierSummary']);
