@@ -152,4 +152,35 @@ class SupplierController extends Controller
             'message' => 'Supplier deleted successfully'
         ], Response::HTTP_OK);
     }
+
+    /**
+     * Display a summary for each supplier.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function supplierSummary()
+    {
+        $suppliers = Supplier::with('items')->get();
+
+        $summary = $suppliers->map(function ($supplier) {
+            $itemCount = $supplier->items->count();
+            $totalValue = $supplier->items->sum(function ($item) {
+                return $item->quantity * $item->price;
+            });
+
+            return [
+                'supplier_id' => $supplier->id,
+                'supplier_name' => $supplier->name,
+                'item_count' => $itemCount,
+                'total_stock_value' => $totalValue,
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Supplier summary retrieved successfully',
+            'data' => $summary
+        ], Response::HTTP_OK);
+    }
+
 }
