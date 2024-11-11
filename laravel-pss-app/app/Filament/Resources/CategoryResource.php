@@ -40,6 +40,9 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('admin.username')
                     ->label('Created By')
                     ->searchable()
