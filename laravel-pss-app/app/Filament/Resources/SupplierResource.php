@@ -28,9 +28,9 @@ class SupplierResource extends Resource
                     ->maxLength(100),
                 Forms\Components\TextInput::make('contact_info')
                     ->maxLength(100),
-                Forms\Components\TextInput::make('created_by')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('created_by')
+                    ->relationship('admin', 'username')
+                    ->required(),
             ]);
     }
 
@@ -42,8 +42,9 @@ class SupplierResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('contact_info')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_by')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('admin.username')
+                    ->label('Created By')
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
