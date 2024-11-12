@@ -95,9 +95,17 @@ Jalankan migrasi untuk membuat tabel dan `--seed` untuk mengisi data awal:
 docker exec laravel-app php artisan migrate --seed
 ```
 
-### Mengakses Aplikasi
+## Mengakses Aplikasi
 
 Setelah kontainer berjalan, Anda bisa mengakses aplikasi Laravel di: [http://localhost:8080](http://localhost:8080)
+
+## Mengakses Admin Panel
+
+Anda bisa mengakses admin panel di: [http://localhost:8080/admin](http://localhost:8080/admin), dengan akun admin yang berada di file `database/seeders/AdminSeeder.php` atau menggunakan akun berikut:
+
+-   **Email**: `admin@mail.com`
+
+-   **Password**: `password`
 
 ## Dokumentasi API
 
