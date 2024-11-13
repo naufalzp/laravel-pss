@@ -79,7 +79,7 @@ class ItemController extends Controller
      */
     public function show(int $id)
     {
-        $item = Item::find($id)->load('admin', 'category', 'supplier');
+        $item = Item::find($id);
 
         if (!$item) {
             return response()->json([
@@ -87,6 +87,8 @@ class ItemController extends Controller
                 'message' => 'Item not found'
             ], Response::HTTP_NOT_FOUND);
         }
+
+        $item->load('admin', 'category', 'supplier');
 
         return response()->json([
             'status' => 'success',
